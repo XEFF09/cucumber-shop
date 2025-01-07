@@ -23,7 +23,7 @@ public class BuyStepdefs {
     }
 
     @When("I buy {string} with quantity {int}")
-    public void i_buy_with_quantity(String name, int quantity) {
+    public void i_buy_with_quantity(String name, int quantity) throws OutOfStockException {
         Product prod = catalog.getProduct(name);
         order.addItem(prod, quantity);
     }
@@ -31,6 +31,12 @@ public class BuyStepdefs {
     @Then("total should be {float}")
     public void total_should_be(double total) {
         assertEquals(total, order.getTotal());
+    }
+
+    @Then("quantity of {string} should be {int}")
+    public void quantity_of_product_should_be(String name, int quantity) {
+        Product prod = catalog.getProduct(name);
+        assertEquals(quantity, prod.getStock());
     }
 }
 

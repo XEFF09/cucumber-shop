@@ -13,7 +13,7 @@ public class Order {
         this.date = LocalDateTime.now();
     }
 
-    public void addItem(Product prod, int quantity) {
+    public void addItem(Product prod, int quantity) throws OutOfStockException {
         items.add(new OrderItem(prod, quantity));
         prod.cutStock(quantity);
     }
